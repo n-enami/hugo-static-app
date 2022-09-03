@@ -43,8 +43,28 @@ jobs:
           api_location: "" # Api source code path - optional
           output_location: "public" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
-        env:
-          HUGO_VERSION: 0.58.0
+        # カスタム Hugo バージョン
+        # https://docs.microsoft.com/ja-jp/azure/static-web-apps/publish-hugo#custom-hugo-version
+        # に記載の対応を行ったが、
+        # GitHub Actionsで下記のエラーが発生したためコメントアウトする。
+        # https://github.com/n-enami/hugo-static-app/runs/8167773458?check_suite_focus=true
+        # 
+        # Downloading and extracting hugo version 0.58.0 to /opt/hugo/0.58.0...
+        # Downloaded in 1 sec(s).
+        # Extracting contents...
+        # Done in 1 sec(s).
+        # Using Hugo version:
+        # Hugo Static Site Generator v0.58.0-64D8BF1E/extended linux/amd64 BuildDate: 2019-09-04T15:49:24Z
+        # WARN 2022/09/03 06:57:47 Module "ananke" is not compatible with this Hugo version; run "hugo mod graph" for more information.
+        # Error: add site dependencies: load resources: loading templates: "/github/workspace/themes/ananke/layouts/partials/func/warn.html:15:1": parse failed: template: partials/func/warn.html:15: function "warnf" not defined
+        # ---End of Oryx build logs---
+        # Oryx has failed to build the solution.
+        # For further information, please visit the Azure Static Web Apps documentation at https://docs.microsoft.com/en-us/azure/static-web-apps/
+        # If you believe this behavior is unexpected, please raise a GitHub issue at https://github.com/azure/static-web-apps/issues/
+        # Exiting
+        #
+        #env:
+        #  HUGO_VERSION: 0.58.0
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
